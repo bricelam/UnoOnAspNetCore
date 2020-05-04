@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="App1.Client.Views.FetchDataPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+    <Grid x:Name="ContentArea" Margin="{StaticResource SmallLeftRightMargin}">
+        <Grid>
+            <controls:DataGrid
+                AutoGenerateColumns="False"
+                GridLinesVisibility="Horizontal"
+                ItemsSource="{x:Bind Source, Mode=OneWay}">
+                <controls:DataGrid.Columns>
+                    <controls:DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                    <controls:DataGridTextColumn Binding="{Binding TemperatureC}" Header="Temp. (C)" />
+                    <controls:DataGridTextColumn Binding="{Binding TemperatureF}" Header="Temp. (F)" />
+                    <controls:DataGridTextColumn Binding="{Binding Summary}" Header="Summary" />
+                </controls:DataGrid.Columns>
+            </controls:DataGrid>
+        </Grid>
+    </Grid>
+</Page>

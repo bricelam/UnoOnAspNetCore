@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "oidc-client@1.10.0",
+      "destination": "WasmScripts/",
+      "files": [
+        "oidc-client.min.js"
+      ]
+    }
+  ]
+}

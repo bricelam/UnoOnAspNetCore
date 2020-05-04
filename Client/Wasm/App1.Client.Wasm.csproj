@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <WasmHead>true</WasmHead>
+    <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
+    <NoWarn>NU1701</NoWarn>
+    <AssemblyName>App1.Client.Wasm</AssemblyName>
+    <RootNamespace>App1.Client</RootNamespace>
+    <WasmShellDistPath>..\..\Server\wwwroot</WasmShellDistPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
+    <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="WasmScripts\oidc-client.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WasmCSS\Fonts.css" />
+    <EmbeddedResource Include="WasmScripts\AppManifest.js" />
+    <EmbeddedResource Include="WasmScripts\oidc-client.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <LinkerDescriptor Include="LinkerConfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <!-- Note that for WebAssembly version 1.1.1 of the console logger required -->
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.2" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls" Version="6.1.0-build.71.g38c59ea2a0" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls.DataGrid" Version="6.1.0-build.71.g38c59ea2a0" />
+    <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed" Version="2.0.2-uno.66" />
+    <PackageReference Include="Uno.UI" Version="2.3.0-dev.112" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="2.3.0-dev.112" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.2.0-dev.29" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="1.2.0-dev.29" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\App1.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- NB: Using mono-wasm since Uno doesn't support async (unoplatform/uno#3084) -->
+    <Reference Include="WebAssembly.Bindings">
+      <!-- TODO: Update this whenever Uno does -->
+      <HintPath>$(TEMP)\mono-wasm-34cccfa2fde\framework\WebAssembly.Bindings.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <Import Project="..\Shared\App1.Client.Shared.projitems" Label="Shared" Condition="Exists('..\Shared\App1.Client.Shared.projitems')" />
+</Project>
