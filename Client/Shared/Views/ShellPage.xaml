@@ -35,7 +35,7 @@
             -->
             <NavigationViewItem x:Uid="Shell_Home" Icon="Document" helpers:NavHelper.NavigateTo="views:HomePage" />
             <NavigationViewItem x:Uid="Shell_Counter" Icon="Document" helpers:NavHelper.NavigateTo="views:CounterPage" />
-            <NavigationViewItem x:Uid="Shell_FetchData" Icon="Document" helpers:NavHelper.NavigateTo="views:FetchDataPage" />
+            <NavigationViewItem x:Uid="Shell_FetchData" Icon="Document" helpers:NavHelper.NavigateTo="views:FetchDataPage" Visibility="{x:Bind IsAuthorized, Mode=OneWay}" />
         </NavigationView.MenuItems>
         <i:Interaction.Behaviors>
             <behaviors:NavigationViewHeaderBehavior
